@@ -1,0 +1,46 @@
+name: school-system
+
+services:
+  database:
+    image: postgres:16-alpine
+    container_name: school-system-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: martin321!
+      POSTGRES_DB: school_system
+    ports:
+      - "5431:5432"
+    volumes:
+      - database_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - school-system-net
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: school-system-api
+    ports:
+      - "3200:3200"
+    environment:
+      PORT: "3200"
+      DATABASE_URL: "postgres://postgres:martin321!@database:5432/school_system?sslmode=disable"
+      ENVIRONMENT: "development"
+      LOG_LEVEL: "debug"
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - school-system-net
+
+networks:
+  school-system-net:
+    driver: bridge
+
+volumes:
+  database_data:
