@@ -1,0 +1,11 @@
+version: "2"
+
+sql:
+  - engine: "postgresql"
+    schema: "../database/migrations/iam"
+    queries: "../database/queries/iam"
+    gen:
+      go:
+        package: "iamdb"
+        out: "../internal/iam/infrastructure/database"
+        sql_package: "pgx/v5"

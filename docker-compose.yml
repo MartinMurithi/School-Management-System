@@ -1,0 +1,5 @@
+name: school-system
+
+include:
+  - server/docker-compose.yml
+  - frontend/docker-compose.yml
