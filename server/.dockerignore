@@ -1,0 +1,10 @@
+.git/
+.gitignore
+*.md
+tests/
+scripts/
+docs/
+configs/
+deployments/
+sqlc/
+.DS_Store
