@@ -28,7 +28,7 @@ bun --version
 # Install
 curl -fsSL https://bun.sh/install | bash
 
-# The project uses bun for the frontend (faster than npm/pnpm).
+# The project uses bun for the frontend
 # After installing, cd into frontend/ and run:
 bun install
 ```
